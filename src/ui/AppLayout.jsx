@@ -7,6 +7,7 @@ function AppLayout() {
     <div>
       <Header />
       <main>
+        <p>Conteúdo da rota filha atual.</p>
         <Outlet />
       </main>
       <CartOverview />

@@ -4,7 +4,7 @@ function Header() {
   return (
     <header>
       <Link to="/">Fast ReactPizza Co.</Link>
-      <p>Marcel</p>
+      <p>Header</p>
     </header>
   );
 }
