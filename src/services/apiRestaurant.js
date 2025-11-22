@@ -8,7 +8,30 @@ export async function getMenu() {
   if (!res.ok) throw Error("Failed getting menu");
 
   const { data } = await res.json();
-  return data;
+
+  //linking the name of the pizzas to a local img's:
+  const imageMap = {
+    Margherita: "/pizzas/margherita.png",
+    Capricciosa: "/pizzas/capricciosa.png",
+    Romana: "/pizzas/romana.png",
+    "Prosciutto e Rucola": "/pizzas/prosciutto_rucola.png",
+    Diavola: "/pizzas/diavola.png",
+    Vegetale: "/pizzas/vegetale.png",
+    Napoli: "/pizzas/napoli.png",
+    Siciliana: "/pizzas/siciliana.png",
+    Pepperoni: "/pizzas/pepperoni.png",
+    Hawaiian: "/pizzas/hawaiian.png",
+    "Spinach and Mushroom": "/pizzas/spinach_mush.png",
+    Mediterranean: "/pizzas/mediterranean.png",
+    Greek: "/pizzas/greek.png",
+    Abruzzese: "/pizzas/abruzzese.png",
+    "Pesto Chicken": "/pizzas/pesto.png",
+    "Eggplant Parmesan": "/pizzas/egg_parmesan.png",
+    "Roasted Veggie": "/pizzas/roasted.png",
+    "Tofu and Mushroom": "/pizzas/tofu.png",
+  };
+
+  return data.map((pizza) => ({ ...pizza, imageUrl: imageMap[pizza.name] }));
 }
 
 export async function getOrder(id) {

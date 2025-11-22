@@ -20,7 +20,6 @@ function Menu() {
 }
 
 //fetch the data from apiRestaurant.js and return it.
-//GPT: Por que await async?
 export async function loader() {
   const menu = await getMenu();
   return menu;

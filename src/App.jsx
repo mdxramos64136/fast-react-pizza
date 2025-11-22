@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./ui/Home";
+import Error from "./ui/Error";
 import Menu, { loader as menuLoader } from "./features/menu/Menu"; //renaming named import
 import Cart from "./features/cart/Cart";
 import CreateOrder from "./features/order/CreateOrder";
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
   //the only porpouse of the {} below is to provide layout to the app
   {
     element: <AppLayout />,
+    errorElement: <Error />,
     children: [
       {
         path: "/", //the root
@@ -28,6 +30,7 @@ const router = createBrowserRouter([
         path: "/menu",
         element: <Menu />,
         loader: menuLoader,
+        errorElement: <Error />,
       },
       {
         path: "/cart",
