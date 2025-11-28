@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 
 import { useState } from "react";
-import { Form, redirect } from "react-router-dom";
+import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
 
 // https://uibakery.io/regex-library/phone-number
@@ -33,11 +33,18 @@ const fakeCart = [
     totalPrice: 15,
   },
 ];
-
+/////////////////////////////////////////////////////////////
 function CreateOrder() {
   // const [withPriority, setWithPriority] = useState(false);
   const cart = fakeCart;
+  const navigation = useNavigation();
+  const isSubmiting = navigation.state === "submitting";
 
+  /** This componnet is connected with the actio createOrderAction, so it has
+   * access to the data that is returned from that action. */
+  const formErrors = useActionData();
+
+  //
   return (
     <div>
       <h2>Ready to order? Let's go!</h2>
@@ -53,6 +60,7 @@ function CreateOrder() {
           <div>
             <input type="tel" name="phone" required />
           </div>
+          {formErrors?.phone && <p>{formErrors.phone}</p>}
         </div>
 
         <div>
@@ -75,7 +83,9 @@ function CreateOrder() {
 
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
-          <button>Order now</button>
+          <button disabled={isSubmiting}>
+            {isSubmiting ? "Placing Order..." : "Order now"}
+          </button>
         </div>
       </Form>
     </div>
@@ -84,20 +94,31 @@ function CreateOrder() {
 
 /** we cannot redirect  user to another page using navigate function
  * because it comes from calling useNavigateHook and hooks can only be used
- * inside Components. So we use redirect function provided by RR. it creates a new request
+ * inside Components. So we use redirect function provided by RR. It creates
+ * a new request.
+ * It only works inside loadess and actions
  * */
 export async function action({ request }) {
   //formData() is provided by the browser
   const formData = await request.formData();
-  //convert to objetc:
+  //convert to JS objetc:
   const data = Object.fromEntries(formData);
 
+  // builds ther order object
   const order = {
     ...data,
     cart: JSON.parse(data.cart),
     priority: data.priority === "on",
   };
 
+  //error handling in form action
+  const errors = {};
+  if (!isValidPhone(order.phone))
+    errors.phone = "Please provide a valid phone number!";
+
+  if (Object.keys(errors).length > 0) return errors;
+
+  //if evething is ok, create a new order and redirect
   const newOrder = await createOrder(order);
 
   return redirect(`/order/${newOrder.id}`);
