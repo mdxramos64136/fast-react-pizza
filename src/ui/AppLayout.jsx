@@ -8,13 +8,14 @@ function AppLayout() {
   //whenever it's true render the loading indicator
   const isLoading = navigation.state === "loading";
   return (
-    <div className="layout">
+    <div className="grid h-screen grid-rows-[auto_1fr_auto] ">
       {isLoading && <Loader />}
       <Header />
-      <main>
-        <p>Conteúdo da rota filha atual.</p>
+      <div className="overflow-scroll">
+      <main className=" max-w-3xl mx-auto">
         <Outlet />
       </main>
+      </div>
       <CartOverview />
     </div>
   );
@@ -22,9 +23,4 @@ function AppLayout() {
 
 export default AppLayout;
 
-/**
- * <AppLayout/> is the parent route of others route in the app
- * <Outlet/> renders the content of the nested route inside another route.
- * It's provided by react-router-dom
- *
- */
+
