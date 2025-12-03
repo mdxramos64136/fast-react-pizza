@@ -52,13 +52,13 @@ function CreateOrder() {
       <Form method="POST">
         <div>
           <label>First Name</label>
-          <input type="text" name="customer" required />
+          <input type="text" name="customer" required className="input" />
         </div>
 
         <div>
           <label>Phone number</label>
           <div>
-            <input type="tel" name="phone" required />
+            <input type="tel" name="phone" required className="input" />
           </div>
           {formErrors?.phone && <p>{formErrors.phone}</p>}
         </div>
@@ -66,12 +66,18 @@ function CreateOrder() {
         <div>
           <label>Address</label>
           <div>
-            <input type="text" name="address" required />
+            <input type="text" name="address" required 
+            className="input"/>
           </div>
         </div>
 
         <div>
           <input
+            className="h-4 w-4 accent-yellow-600 
+            focus:outline-none focus:ring-2
+            focus:ring-yellow-400 focus:ring-offset-2
+            border-yellow-600
+            border-2"
             type="checkbox"
             name="priority"
             id="priority"
@@ -83,7 +89,7 @@ function CreateOrder() {
 
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
-          <button disabled={isSubmiting}>
+          <button disabled={isSubmiting} className="bg-yellow-400 uppercase font-semibold text-stone-800 py-3 px-4 inline-block tracking-wide rounded-full hover:bg-yellow-500 hover:text-yellow-100 transition-colors duration-500 focus:ring-yellow-500 focus:bg-yellow-300 focus:outline-none focus:ring focus:ring-offset-2 disabled:cursor-not-allowed" >
             {isSubmiting ? "Placing Order..." : "Order now"}
           </button>
         </div>
