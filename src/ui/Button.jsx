@@ -13,6 +13,13 @@ function Button({ children, disabled, to, type }) {
   const styles = {
     primary: base + " md:px-6 md:py-4 py-3 px-4",
     small: base + " px-4 py-2 md:px-5 md:py-2.5 text-xs",
+    secondary: `border-2 border-ambar-200 uppercase font-semibold 
+             text-red-400 inline-block tracking-wide 
+             rounded-full hover:bg-red-400
+             hover:text-white transition-colors 
+             duration-500 focus:ring-red-500 
+             focus:bg-red-400 focus:outline-none focus:ring focus:text-white
+             focus:ring-offset-2 disabled:cursor-not-allowed md:px-6 md:py-3.5 py-2.5 px-4 `,
   };
 
   //if there is 'to' prop, return a <Link> not a Button
@@ -22,7 +29,11 @@ function Button({ children, disabled, to, type }) {
         {children}
       </Link>
     );
-  return <button disabled={disabled}>{children}</button>;
+  return (
+    <button disabled={disabled} className={styles[type]}>
+      {children}
+    </button>
+  );
 }
 
 export default Button;
