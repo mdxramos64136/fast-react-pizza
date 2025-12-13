@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Button({ children, disabled, to, type }) {
   //based on the type, get the type from the object
-  const base = `bg-yellow-400 uppercase font-semibold 
+  const base = ` text-sm bg-yellow-400 uppercase font-semibold 
              text-stone-800 inline-block tracking-wide 
              rounded-full hover:bg-yellow-500
              hover:text-yellow-100 transition-colors 
@@ -13,7 +13,7 @@ function Button({ children, disabled, to, type }) {
   const styles = {
     primary: base + " md:px-6 md:py-4 py-3 px-4",
     small: base + " px-4 py-2 md:px-5 md:py-2.5 text-xs",
-    secondary: `border-2 border-ambar-200 uppercase font-semibold 
+    secondary: ` text-sm border-2 border-ambar-200 uppercase font-semibold 
              text-red-400 inline-block tracking-wide 
              rounded-full hover:bg-red-400
              hover:text-white transition-colors 
