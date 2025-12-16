@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Button({ children, disabled, to, type }) {
+function Button({ children, disabled, to, type, onClick }) {
   //based on the type, get the type from the object
   const base = ` text-sm bg-yellow-400 uppercase font-semibold 
              text-stone-800 inline-block tracking-wide 
@@ -23,12 +23,22 @@ function Button({ children, disabled, to, type }) {
   };
 
   //if there is 'to' prop, return a <Link> not a Button
-  if (to)
+  if (to) {
     return (
       <Link to={to} className={styles[type]}>
         {children}
       </Link>
     );
+  }
+
+  if (onClick) {
+    return (
+      <button onClick={onClick} disabled={disabled} className={styles[type]}>
+        {children}
+      </button>
+    );
+  }
+
   return (
     <button disabled={disabled} className={styles[type]}>
       {children}
