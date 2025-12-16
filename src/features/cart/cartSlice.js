@@ -34,7 +34,7 @@ const cartSlice = createSlice({
     },
   },
 });
-console.log(cartSlice);
+//console.log(cartSlice);
 
 //
 export const {
@@ -46,3 +46,9 @@ export const {
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
+
+export const getTotalCartQty = (state) =>
+  state.cart.cart.reduce((sum, curItem) => sum + curItem.quantity, 0);
+
+export const getTotalPrice = (state) =>
+  state.cart.cart.reduce((sum, curItem) => sum + curItem.totalPrice, 0);
