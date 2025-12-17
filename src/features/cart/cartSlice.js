@@ -34,7 +34,7 @@ const cartSlice = createSlice({
     },
   },
 });
-//console.log(cartSlice);
+console.log(cartSlice);
 
 //
 export const {
@@ -46,9 +46,14 @@ export const {
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
-
+//first cart = slice's name
+//second cart = array in the slice
 export const getTotalCartQty = (state) =>
   state.cart.cart.reduce((sum, curItem) => sum + curItem.quantity, 0);
 
 export const getTotalPrice = (state) =>
   state.cart.cart.reduce((sum, curItem) => sum + curItem.totalPrice, 0);
+
+export const getCart = (state) => state.cart.cart;
+export const getCurrentQuantityById = (id) => (state) =>
+  state.cart.cart.find((item) => item.pizzaId === id)?.quantity ?? 0;
