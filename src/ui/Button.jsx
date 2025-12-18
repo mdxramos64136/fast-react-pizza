@@ -20,6 +20,7 @@ function Button({ children, disabled, to, type, onClick }) {
              duration-500 focus:ring-red-500 
              focus:bg-red-400 focus:outline-none focus:ring focus:text-white
              focus:ring-offset-2 disabled:cursor-not-allowed md:px-6 md:py-3.5 py-2.5 px-4 `,
+    round: base + " px-2.5 py-1 md:px-3.5 md:py-2 text-xs",
   };
 
   //if there is 'to' prop, return a <Link> not a Button
