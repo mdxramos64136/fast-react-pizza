@@ -3,13 +3,15 @@ import LinkButton from "../../ui/LinkButton";
 import Button from "../../ui/Button";
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
-import { getCart } from "./cartSlice";
+import { getCart, getTotalPrice } from "./cartSlice";
 import { useDispatch } from "react-redux";
 import { clearCart } from "./cartSlice";
 import EmptyCart from "./EmptyCart";
+import { formatCurrency } from "../../utils/helpers";
 
 function Cart() {
   const cart = useSelector(getCart);
+  const totalCartPrice = useSelector(getTotalPrice);
   const username = useSelector((store) => store.user.username);
   const dispatch = useDispatch();
 
@@ -33,7 +35,7 @@ function Cart() {
 
       <div className="mt-6 space-x-2">
         <Button to="/order/new" type="primary">
-          Order pizzas
+          Order pizzas - {formatCurrency(totalCartPrice)}
         </Button>
         <Button type="secondary" onClick={handleClear}>
           Clear Cart
