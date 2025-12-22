@@ -31,16 +31,24 @@ function CreateOrder() {
   /** This componnet is connected with the action createOrderAction, so it has
    * access to the data that is returned from that action. */
   const formErrors = useActionData();
-  const username = useSelector((store) => store.user.username);
+  const {
+    username,
+    status: addressStatus,
+    position,
+    address,
+    error: errorAddress,
+  } = useSelector((store) => store.user);
+
+  const isLoadingAddress = addressStatus === "loading";
+
   const dispatch = useDispatch();
+
   if (!cart) return <EmptyCart />;
 
   ////////////////////////////
   return (
     <div className="px-4 py-6">
       <h2 className="mb-8 text-xl font-semibold">Ready to order? Let's go!</h2>
-
-      <button onClick={() => dispatch(fetchAddress())}>Get Position</button>
 
       <Form method="POST">
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
@@ -68,16 +76,35 @@ function CreateOrder() {
           )}
         </div>
 
-        <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
+        <div className="relative mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-40">Address</label>
           <div className="grow">
             <input
+              disabled={isLoadingAddress}
+              defaultValue={address}
               type="text"
               name="address"
               required
               className="input w-full"
             />
+            {addressStatus === "error" && (
+              <p className="mt-2 rounded-md bg-red-100 p-2 text-xs font-bold text-red-600">
+                {errorAddress}
+              </p>
+            )}
           </div>
+          <span className="absolute top-[3px] right-[3px] z-50 md:top-[5px] md:right-[5px]">
+            <Button
+              disabled={isLoadingAddress}
+              type={"small"}
+              onClick={(e) => {
+                e.preventDefault();
+                dispatch(fetchAddress());
+              }}
+            >
+              Get Position
+            </Button>
+          </span>
         </div>
 
         <div className="mb-12 flex items-center gap-5">
@@ -96,8 +123,17 @@ function CreateOrder() {
 
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
+          <input
+            type="hidden"
+            name="position"
+            value={
+              position.longitude && position.latitude
+                ? `${position.latitude} , ${position.longitude}`
+                : " "
+            }
+          />
           <Button disabled={isSubmiting} type="primary">
-            {isSubmiting ? "Placing Order..." : "Order now"}{" "}
+            {isSubmiting ? "Placing Order..." : "Order now"}
             {formatCurrency(totalPrice)}
           </Button>
         </div>
