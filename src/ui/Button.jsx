@@ -12,6 +12,7 @@ function Button({ children, disabled, to, type, onClick }) {
 
   const styles = {
     primary: base + " md:px-6 md:py-4 py-3 px-4",
+    order: base + " md:px-6 md:py-4 py-3 px-4 w-full sm:w-auto",
     small: base + " px-4 py-2 md:px-5 md:py-2.5 text-xs",
     secondary: ` text-sm border-2 border-ambar-200 uppercase font-semibold 
              text-red-400 inline-block tracking-wide 

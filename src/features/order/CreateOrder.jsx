@@ -76,35 +76,37 @@ function CreateOrder() {
           )}
         </div>
 
-        <div className="relative mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
+        {/* <div className="relative mb-5 flex flex-col gap-2 sm:flex-row sm:items-center"> */}
+        <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-40">Address</label>
-          <div className="grow">
+          <div className="relative grow">
             <input
               disabled={isLoadingAddress}
               defaultValue={address}
               type="text"
               name="address"
               required
-              className="input w-full"
+              className="input w-full pr-28"
             />
             {addressStatus === "error" && (
               <p className="mt-2 rounded-md bg-red-100 p-2 text-xs font-bold text-red-600">
                 {errorAddress}
               </p>
             )}
+            {/* <span className="absolute top-[3px] right-[3px] z-50 md:top-[5px] md:right-[5px]"> */}
+            <span className="absolute inset-y-1 right-1 flex items-stretch">
+              <Button
+                disabled={isLoadingAddress}
+                type={"small"}
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(fetchAddress());
+                }}
+              >
+                Get Position
+              </Button>
+            </span>
           </div>
-          <span className="absolute top-[3px] right-[3px] z-50 md:top-[5px] md:right-[5px]">
-            <Button
-              disabled={isLoadingAddress}
-              type={"small"}
-              onClick={(e) => {
-                e.preventDefault();
-                dispatch(fetchAddress());
-              }}
-            >
-              Get Position
-            </Button>
-          </span>
         </div>
 
         <div className="mb-12 flex items-center gap-5">
@@ -121,7 +123,7 @@ function CreateOrder() {
           </label>
         </div>
 
-        <div>
+        <div className="flex sm:justify-end">
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
           <input
             type="hidden"
@@ -132,8 +134,8 @@ function CreateOrder() {
                 : " "
             }
           />
-          <Button disabled={isSubmiting} type="primary">
-            {isSubmiting ? "Placing Order..." : "Order now"}
+          <Button disabled={isSubmiting} type="order">
+            {isSubmiting ? "Placing Order..." : "Order now "}
             {formatCurrency(totalPrice)}
           </Button>
         </div>
