@@ -15,12 +15,16 @@ function SearchOrder() {
 
   return (
     <form onSubmit={handleSubmit}>
+      <label className="sr-only" htmlFor="order-search">
+        Search order by ID
+      </label>
       <input
+        id="order-search"
         type="text"
         placeholder="search order #"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="bg-yellow-100 rounded-full px-4 py-2 text-sm placeholder:text-stone-400 w-28 sm:w-64  sm:focus:w-62 transition-all duration-600 focus:outline-none focus:ring focus:ring-yellow-700 focus:ring-opacity-50"
+        className="focus:ring-opacity-50 w-28 rounded-full bg-yellow-100 px-4 py-2 text-sm transition-all duration-600 placeholder:text-stone-400 focus:ring focus:ring-yellow-700 focus:outline-none sm:w-42 sm:focus:w-64"
       />
     </form>
   );

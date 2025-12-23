@@ -15,13 +15,15 @@ function Home() {
         </span>
       </h1>
 
-      {username === "" ? (
-        <CreateUser />
-      ) : (
-        <Button to="/menu" type="primary">
-          Continue ordering, {username}
-        </Button>
-      )}
+      <div aria-live="polite">
+        {username === "" ? (
+          <CreateUser />
+        ) : (
+          <Button to="/menu" type="primary">
+            Continue ordering, {username}
+          </Button>
+        )}
+      </div>
     </div>
   );
 }

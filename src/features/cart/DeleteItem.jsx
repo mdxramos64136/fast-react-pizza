@@ -2,12 +2,16 @@ import { useDispatch } from "react-redux";
 import Button from "../../ui/Button";
 import { removeItem } from "./cartSlice";
 
-function DeleteItem({ pizzaId }) {
+function DeleteItem({ pizzaId, name }) {
   const dispatch = useDispatch();
 
   ////////
   return (
-    <Button type="small" onClick={() => dispatch(removeItem(pizzaId))}>
+    <Button
+      ariaLabel={`Remove ${name} pizza from cart`}
+      type="small"
+      onClick={() => dispatch(removeItem(pizzaId))}
+    >
       Delete
     </Button>
   );

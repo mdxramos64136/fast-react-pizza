@@ -8,13 +8,17 @@ function UpdateItemQty({ pizzaId, currentQuantity }) {
   return (
     <div className="flex items-center gap-1 md:gap-3">
       <Button
+        ariaLabel="Decrease quantity."
         type="round"
         onClick={() => dispatch(decreaseItemQuantity(pizzaId))}
       >
         -
       </Button>
-      <span className="tx-sm font-medium">{currentQuantity}</span>
+      <span aria-live="polite" className="tx-sm font-medium">
+        {currentQuantity}
+      </span>
       <Button
+        ariaLabel="Increase quantity"
         type="round"
         onClick={() => dispatch(increaseItemQuantity(pizzaId))}
       >

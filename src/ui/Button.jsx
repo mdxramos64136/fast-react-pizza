@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Button({ children, disabled, to, type, onClick }) {
+function Button({ children, disabled, to, type, onClick, ariaLabel }) {
   //based on the type, get the type from the object
   const base = ` text-sm bg-yellow-400 uppercase font-semibold 
              text-stone-800 inline-block tracking-wide 
@@ -35,14 +35,19 @@ function Button({ children, disabled, to, type, onClick }) {
 
   if (onClick) {
     return (
-      <button onClick={onClick} disabled={disabled} className={styles[type]}>
+      <button
+        aria-label={ariaLabel}
+        onClick={onClick}
+        disabled={disabled}
+        className={styles[type]}
+      >
         {children}
       </button>
     );
   }
 
   return (
-    <button disabled={disabled} className={styles[type]}>
+    <button aria-label={ariaLabel} disabled={disabled} className={styles[type]}>
       {children}
     </button>
   );

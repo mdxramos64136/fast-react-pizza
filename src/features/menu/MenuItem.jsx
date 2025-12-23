@@ -34,7 +34,7 @@ function MenuItem({ pizza }) {
         className={`h-24 w-24 ${soldOut ? "opacity-70 grayscale" : ""}`}
       />
       <div className="flex grow flex-col pt-0.5">
-        <p className="font-bold">{name}</p>
+        <h3 className="font-bold">{name}</h3>
         <p className="text-sm text-stone-500 capitalize italic">
           {ingredients.join(", ")}
         </p>
@@ -46,12 +46,16 @@ function MenuItem({ pizza }) {
               Sold out
             </p>
           )}
-          {isInCart && (
-            <di className="flex items-center gap-3 sm:gap-8">
-              <UpdateItemQty pizzaId={id} currentQuantity={currentQuantity} />{" "}
-              <DeleteItem pizzaId={id} />
-            </di>
-          )}
+
+          <div>
+            {isInCart && (
+              <div className="flex items-center gap-3 sm:gap-8">
+                <UpdateItemQty pizzaId={id} currentQuantity={currentQuantity} />
+                <DeleteItem pizzaId={id} name={name} />
+              </div>
+            )}
+          </div>
+
           {!soldOut && (
             <Button type="small" onClick={handleAdd}>
               Add to cart

@@ -18,11 +18,19 @@ function CreateUser() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <p className="mb-4 text-sm text-stone-600 md:text-base">
+      <p
+        id="username-instruction"
+        className="mb-4 text-sm text-stone-600 md:text-base"
+      >
         👋 Welcome! Please start by telling us your name:
       </p>
 
+      <label htmlFor="username" className="sr-only">
+        Your full name
+      </label>
       <input
+        id="username"
+        aria-describedby="username-instruction"
         type="text"
         placeholder="Your full name"
         value={username}
@@ -30,11 +38,13 @@ function CreateUser() {
         className="input mb-3 w-72"
       />
 
-      {username !== "" && (
-        <div>
-          <Button type="primary">Start ordering</Button>
-        </div>
-      )}
+      <div aria-live="ppolite">
+        {username !== "" && (
+          <div>
+            <Button type="primary">Start ordering</Button>
+          </div>
+        )}
+      </div>
     </form>
   );
 }
