@@ -52,9 +52,12 @@ function CreateOrder() {
 
       <Form method="POST">
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
-          <label className="sm:basis-40">First Name</label>
+          <label htmlFor="customer" className="sm:basis-40">
+            First Name
+          </label>
           <div className="grow">
             <input
+              id="customer"
               type="text"
               name="customer"
               required
@@ -65,22 +68,40 @@ function CreateOrder() {
         </div>
 
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
-          <label className="sm:basis-40">Phone number</label>
+          <label htmlFor="phone-number" className="sm:basis-40">
+            Phone number
+          </label>
           <div className="grow">
-            <input type="tel" name="phone" required className="input w-full" />
+            <input
+              id="phone-number"
+              aria-describedby={formErrors?.phone ? "phone-error" : undefined}
+              type="tel"
+              name="phone"
+              required
+              className="input w-full"
+            />
           </div>
           {formErrors?.phone && (
-            <p className="mt-2 rounded-md bg-red-100 p-2 text-xs font-bold text-red-600">
+            <p
+              id="phone-error"
+              role="alert"
+              className="mt-2 rounded-md bg-red-100 p-2 text-xs font-bold text-red-600"
+            >
               {formErrors.phone}
             </p>
           )}
         </div>
 
-        {/* <div className="relative mb-5 flex flex-col gap-2 sm:flex-row sm:items-center"> */}
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
-          <label className="sm:basis-40">Address</label>
+          <label htmlFor="address" className="sm:basis-40">
+            Address
+          </label>
           <div className="relative grow">
             <input
+              id="address"
+              aria-describedby={
+                addressStatus === "error" ? "address-error" : undefined
+              }
               disabled={isLoadingAddress}
               defaultValue={address}
               type="text"
@@ -89,15 +110,24 @@ function CreateOrder() {
               className="input w-full pr-28"
             />
             {addressStatus === "error" && (
-              <p className="mt-2 rounded-md bg-red-100 p-2 text-xs font-bold text-red-600">
+              <p
+                id="address-error"
+                role="alert"
+                className="mt-2 rounded-md bg-red-100 p-2 text-xs font-bold text-red-600"
+              >
                 {errorAddress}
               </p>
             )}
-            {/* <span className="absolute top-[3px] right-[3px] z-50 md:top-[5px] md:right-[5px]"> */}
+
+            <p aria-live="polite" className="sr-only">
+              {isLoadingAddress ? "Getting your current location" : ""}
+            </p>
+
             <span className="absolute inset-y-1 right-1 flex items-stretch">
               <Button
                 disabled={isLoadingAddress}
-                type={"small"}
+                type="small"
+                ariaLabel="Get current location to fill address"
                 onClick={(e) => {
                   e.preventDefault();
                   dispatch(fetchAddress());
@@ -119,8 +149,13 @@ function CreateOrder() {
             onChange={(e) => setWithPriority(e.target.checked)}
           />
           <label htmlFor="priority" className="font-medium">
-            Want to yo give your order priority?
+            Want to give your order priority?
           </label>
+
+          {/* FOR SCREEN READER ONLY */}
+          <p aria-live="polite" className="sr-only">
+            Total order price {formatCurrency(totalPrice)}
+          </p>
         </div>
 
         <div className="flex sm:justify-end">

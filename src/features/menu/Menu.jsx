@@ -11,7 +11,7 @@ function Menu() {
 
   //
   return (
-    <ul arial-label="Pizza menu" className="divide-y divide-yellow-300 px-2">
+    <ul aria-label="Pizza menu" className="divide-y divide-yellow-300 px-2">
       {menu.map((pizza) => (
         <MenuItem pizza={pizza} key={pizza.id} />
       ))}

@@ -25,9 +25,14 @@ function Cart() {
     <div className="px-4 py-3">
       <LinkButton to="/menu">Back to Menu</LinkButton>
 
-      <h2 className="tx-xl mt-7 font-semibold">Your cart, {username}</h2>
+      <h2 id="cart-heading" className="tx-xl mt-7 font-semibold">
+        Your cart, {username}
+      </h2>
 
-      <ul className="mt-3 divide-y divide-amber-300 border-b border-amber-300">
+      <ul
+        aria-labelledby="cart-heading"
+        className="mt-3 divide-y divide-amber-300 border-b border-amber-300"
+      >
         {cart.map((item) => (
           <CartItem item={item} key={item.pizzaId} />
         ))}
