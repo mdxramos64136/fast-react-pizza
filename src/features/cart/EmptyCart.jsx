@@ -6,7 +6,8 @@ function EmptyCart() {
       <LinkButton to="/menu">Back to Menu</LinkButton>
 
       <p className="mt-5 font-semibold">
-        ⚠️ Your cart is still empty. Start adding some pizzas :)
+        <span aria-hidden="true">⚠️</span> Your cart is still empty. Start
+        adding some pizzas!
       </p>
     </div>
   );

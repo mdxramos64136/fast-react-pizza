@@ -12,13 +12,18 @@ function CartItem({ item }) {
 
   return (
     <li className="py-2 sm:flex sm:items-center sm:justify-between">
-      <p className="mb-1 sm:mb-0">
+      <p
+        aria-label={`${quantity} ${quantity === 1 ? "item" : "items"} of ${name}`}
+        className="mb-1 sm:mb-0"
+      >
         {quantity}&times; {name}
       </p>
       <div className="flex items-center justify-between sm:gap-6">
-        <p className="text-sm font-bold">{formatCurrency(totalPrice)}</p>
+        <p aria-label={`Total price for ${name}`} className="text-sm font-bold">
+          {formatCurrency(totalPrice)}
+        </p>
         <UpdateItemQty pizzaId={pizzaId} currentQuantity={currentQuantity} />
-        <DeleteItem pizzaId={pizzaId} />
+        <DeleteItem pizzaId={pizzaId} name={name} />
       </div>
     </li>
   );

@@ -6,13 +6,22 @@ function OrderItem({ item, isLoadingIngredients, ingredients }) {
   return (
     <li className="space-y-1 py-3">
       <div className="flex items-center justify-between text-sm">
-        <p className="font-semibold">
-          <span>{quantity}&times;</span> {name}
+        <p
+          aria-label={`${quantity} ${quantity === 1 ? "item" : "items"} of ${name}`}
+          className="font-semibold"
+        >
+          <span>{quantity}&times;</span>
+          {name}
         </p>
-        <p className="font-bold">{formatCurrency(totalPrice)}</p>
+        <p aria-label={`Total price for ${name}`} className="font-bold">
+          {formatCurrency(totalPrice)}
+        </p>
       </div>
-      <p className="text-sm text-stone-500 capitalize italic">
-        {isLoadingIngredients ? "Loanding" : ingredients.join(", ")}
+      <p
+        aria-live="polite"
+        className="text-sm text-stone-500 capitalize italic"
+      >
+        {isLoadingIngredients ? "Loading" : ingredients.join(", ")}
       </p>
     </li>
   );
