@@ -42,7 +42,7 @@ function Order() {
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="text-xl font-semibold">Order #{id} status</h2>
 
-        <div className="space-x-2">
+        <div aria-live="polite" className="space-x-2">
           {priority && (
             <span className="rounded-full bg-red-500 px-3 py-1 text-sm text-red-100 uppercase">
               Priority
@@ -55,9 +55,9 @@ function Order() {
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-2 bg-yellow-50 p-6 py-5 text-yellow-600">
-        <p className="font-medium font-semibold">
+        <p className="font-medium">
           {deliveryIn >= 0
-            ? `Only ${calcMinutesLeft(estimatedDelivery)} minutes left 😃`
+            ? `Only ${calcMinutesLeft(estimatedDelivery)} minutes left`
             : "Order should have arrived"}
         </p>
         <p className="text-xs text-yellow-600">
@@ -81,7 +81,7 @@ function Order() {
 
       <div className="space-y-2 bg-yellow-50 px-6 py-5">
         <p className="text-sm font-medium text-yellow-600">
-          Price pizza: {formatCurrency(orderPrice)}
+          Price toal: {formatCurrency(orderPrice)}
         </p>
         {priority && (
           <p className="text-sm font-medium text-yellow-600">
@@ -92,7 +92,7 @@ function Order() {
           To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}
         </p>
       </div>
-      {!priority && <UpdateOrder order={order} />}
+      <div aria-live="polite">{!priority && <UpdateOrder order={order} />}</div>
     </div>
   );
 }
