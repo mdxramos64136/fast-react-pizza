@@ -21,34 +21,34 @@ import { action as updateOrderAction } from "./features/order/UpdateOrder";
 const router = createBrowserRouter([
   //the only porpouse of the {} below is to provide layout to the app
   {
-    element: <AppLayout />,
-    errorElement: <Error />,
+    path: "/", //the root
+    Component: AppLayout, //Instead of element: <AppLayout/>
+    ErrorBoundary: Error,
     children: [
       {
-        path: "/", //the root
-        element: <Home />,
-        //errorElement: <ErrorPage />,
+        index: true,
+        Component: Home,
       },
       {
-        path: "/menu",
-        element: <Menu />,
+        path: "menu",
+        Component: Menu,
         loader: menuLoader,
-        errorElement: <Error />,
+        ErrorBoundary: Error,
       },
       {
-        path: "/cart",
-        element: <Cart />,
+        path: "cart",
+        Component: Cart,
       },
       {
-        path: "/order/new",
-        element: <CreateOrder />,
+        path: "order/new",
+        Component: CreateOrder,
         action: createOrderAction,
       },
       {
-        path: "/order/:orderId", //with params
-        element: <Order />,
+        path: "order/:orderId", //with params
+        Component: Order,
         loader: orderLoader,
-        errorElement: <Error />,
+        ErrorBoundary: Error,
         action: updateOrderAction,
       },
     ],
